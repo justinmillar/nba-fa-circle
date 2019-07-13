@@ -2,7 +2,6 @@ library(tidyverse)
 library(nbastatR)
 library(circlize)
 
-# The easy, less elegant way ----
 roster_old <- seasons_rosters(2019)
 roster_new <- seasons_rosters(2020)
 assign_nba_teams()
@@ -39,11 +38,20 @@ grid_col <- structure(
   names = df_dict_nba_teams$slugTeam
 )
 
-d <- create_df(transfer_dat, ptsPerGame)
+d <- create_df(transfer_dat, ptsPerGame, rm_same_team = T)
 
 chordDiagram(d, 
-             # directional = 1, 
-             grid.border = NULL, 
-             grid.col = grid_col, 
+             directional = 1, 
+             # grid.border = NULL, 
+             grid.col = grid_col,
+             # annotationTrack = "grid",
+             transparency = 0.5,  
+             annotationTrackHeight = c(0.05, 0.1),
+             direction.type = c("diffHeight", "arrows"), 
+             link.arr.type = "big.arrow",
+             diffHeight  = -0.02, 
+             link.sort = TRUE, 
+             link.largest.ontop = TRUE,
              link.visible = d[[1]] != d[[2]]
 )
+  |\

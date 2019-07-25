@@ -40,6 +40,7 @@ grid_col <- structure(
 
 d <- create_df(transfer_dat, ptsPerGame, rm_same_team = T)
 
+png("fa-movement-points.png")
 chordDiagram(d, 
              directional = 1, 
              # grid.border = NULL, 
@@ -54,4 +55,4 @@ chordDiagram(d,
              link.largest.ontop = TRUE,
              link.visible = d[[1]] != d[[2]]
 )
-  |\
+dev.off()
